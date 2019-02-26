@@ -1,14 +1,14 @@
 const express = require('express');
+const createHealthCheckRouter = require('./routes/createHealthCheckRouter.js')
 
 const createApp = () => {
   const app = express();
 
-  app.get('/', function (req, res) {
-    res.send('Hello World')
-  })
-
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
+  const healthCheckRoute = createHealthCheckRouter();
+  app.use(healthCheckRoute);
 
   return app;
 };
