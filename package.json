@@ -5,6 +5,9 @@
   "repository": "https://github.com/199911/develop-api-with-tdd.git",
   "author": "Ku Lok Sun <sundaykuloksun@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest test"
+  },
   "dependencies": {
     "express": "^4.16.4",
     "mongoose": "^5.4.15"
