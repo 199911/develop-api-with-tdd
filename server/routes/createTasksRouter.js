@@ -5,12 +5,17 @@ const createHealthCheckRouter = (Task) => {
 
   router
     .route('/tasks')
-    .post((req, res) => {
+    .post(async (req, res, next) => {
       const { body } = req;
-      // TODO: Save the task to db
+      let newTask;
+      try {
+        newTask = await Task.create(body);
+      } catch (err) {
+        next(err);
+      }
       res
         .status(201)
-        .send(body);
+        .send(newTask);
     });
 
   return router;
