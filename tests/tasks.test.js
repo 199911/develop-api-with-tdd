@@ -45,4 +45,13 @@ describe('Tasks API', () => {
       expect(body).toMatchObject(fixture);
     });
   });
+
+  describe('GET /tasks', () => {
+    test('should return the task created', async () => {
+      const {body} = await request(app)
+        .get('/tasks')
+        .expect(200);
+      expect(body).toEqual([]);
+    });
+  });
 });
