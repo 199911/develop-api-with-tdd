@@ -32,6 +32,17 @@ describe('Tasks API', () => {
     await resetMongoAsync();
   });
 
-  test('should do something', async () => {
+  describe('POST /tasks', () => {
+    test('should return the task created', async () => {
+      const fixture = {
+        name: 'Prepare demo',
+        description: 'For Show me the code #9',
+      }
+      const {body} = await request(app)
+        .post('/tasks')
+        .send(fixture)
+        .expect(201);
+      expect(body).toMatchObject(fixture);
+    });
   });
 });
