@@ -16,6 +16,12 @@ const createHealthCheckRouter = (Task) => {
       res
         .status(201)
         .send(newTask);
+    })
+    .get(async (req, res, next) => {
+      const tasks = await Task.find();
+      res
+        .status(200)
+        .send(tasks);
     });
 
   return router;

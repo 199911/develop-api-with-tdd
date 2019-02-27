@@ -53,5 +53,43 @@ describe('Tasks API', () => {
         .expect(200);
       expect(body).toEqual([]);
     });
+
+    describe('when there are 3 tasks', () => {
+      const fixtures = [
+        {
+          name: 'Task 1',
+          description: 'Eat',
+        },
+        {
+          name: 'Task 2',
+          description: 'Sleep',
+        },
+        {
+          name: 'Task 3',
+          description: 'Recycle',
+        },
+      ];
+      beforeEach(async () => {
+        await Promise.all(
+          fixtures.map(f => request(app)
+            .post('/tasks')
+            .send(f)
+            .expect(201)
+          )
+        )
+      });
+
+      test('should return 3 tasks', async () => {
+        const { body } = await request(app)
+          .get('/tasks')
+          .expect(200);
+        expect(body.length).toBe(3);
+        expect(body).toEqual(
+          expect.arrayContaining(
+            fixtures.map(expect.objectContaining)
+          )
+        );
+      })
+    });
   });
 });
