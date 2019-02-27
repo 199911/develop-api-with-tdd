@@ -1,5 +1,6 @@
 const express = require('express');
 const createHealthCheckRouter = require('./routes/createHealthCheckRouter.js')
+const createTasksRouter = require('./routes/createTasksRouter.js')
 
 const createApp = () => {
   const app = express();
@@ -9,6 +10,9 @@ const createApp = () => {
 
   const healthCheckRoute = createHealthCheckRouter();
   app.use(healthCheckRoute);
+
+  const tasksRouter = createTasksRouter();
+  app.use(tasksRouter);
 
   return app;
 };
