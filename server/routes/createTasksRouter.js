@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const createHealthCheckRouter = () => {
+const createHealthCheckRouter = (Task) => {
   const router = new Router();
 
   router

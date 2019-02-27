@@ -2,7 +2,7 @@ const express = require('express');
 const createHealthCheckRouter = require('./routes/createHealthCheckRouter.js')
 const createTasksRouter = require('./routes/createTasksRouter.js')
 
-const createApp = () => {
+const createApp = (Task) => {
   const app = express();
 
   app.use(express.json());
@@ -11,7 +11,7 @@ const createApp = () => {
   const healthCheckRoute = createHealthCheckRouter();
   app.use(healthCheckRoute);
 
-  const tasksRouter = createTasksRouter();
+  const tasksRouter = createTasksRouter(Task);
   app.use(tasksRouter);
 
   return app;
