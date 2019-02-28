@@ -28,7 +28,7 @@ const createHealthCheckRouter = (Task) => {
     .route('/tasks/:id')
     .delete(async (req, res, next) => {
       const { id } = req.params;
-      await Task.findByIdAndRemove(id);
+      await Task.findByIdAndUpdate(id, {isDone: true});
       res
         .status(204)
         .end();
