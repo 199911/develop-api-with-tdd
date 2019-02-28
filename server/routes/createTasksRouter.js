@@ -24,6 +24,16 @@ const createHealthCheckRouter = (Task) => {
         .send(tasks);
     });
 
+  router
+    .route('/tasks/:id')
+    .delete(async (req, res, next) => {
+      const { id } = req.params;
+      await Task.findByIdAndRemove(id);
+      res
+        .status(204)
+        .end();
+    });
+
   return router;
 }
 
