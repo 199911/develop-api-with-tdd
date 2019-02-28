@@ -92,4 +92,24 @@ describe('Tasks API', () => {
       })
     });
   });
+
+  describe('DELETE /tasks/{id}', () => {
+    let taskId;
+    beforeEach(async () => {
+      const fixture = {
+        name: 'Prepare demo',
+        description: 'For Show me the code #9',
+      }
+      const {body} = await request(app)
+        .post('/tasks')
+        .send(fixture)
+        .expect(201);
+      taskId = body._id;
+    });
+    test('should return 204 when task is deleted', async () => {
+      await request(app)
+        .delete(`/tasks/${taskId}`)
+        .expect(204);
+    });
+  })
 });
