@@ -90,6 +90,25 @@ describe('Tasks API', () => {
           )
         );
       })
+
+      describe('when a task is deleted', () => {
+        beforeEach(async () => {
+          const { body } = await request(app)
+            .get('/tasks')
+            .expect(200);
+          const task = body.find((t) => t.name === 'Task 2');
+          await request(app)
+            .delete(`/tasks/${task._id}`)
+            .expect(204);
+        });
+
+        test('should return 2 tasks', async () => {
+          const { body } = await request(app)
+            .get('/tasks')
+            .expect(200);
+          expect(body.length).toBe(2);
+        });
+      });
     });
   });
 
